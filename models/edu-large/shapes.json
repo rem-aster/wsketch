@@ -1,0 +1,46 @@
+{
+  "classes": [
+    "none",
+    "line",
+    "arrow",
+    "rectangle",
+    "ellipse",
+    "triangle",
+    "diamond",
+    "pentagon",
+    "hexagon"
+  ],
+  "reject_classes": [
+    "none"
+  ],
+  "input": {
+    "name": "points",
+    "shape": [
+      1,
+      128,
+      2
+    ],
+    "n_points": 128,
+    "contract": "arc-length resampling of the raw stroke to n_points (first and last kept), then bounding-box centre to the origin and the longer side scaled to 1; canvas coordinates, y down"
+  },
+  "outputs": {
+    "probs": [
+      1,
+      9
+    ],
+    "head": [
+      1,
+      128
+    ]
+  },
+  "thresholds": {
+    "line": 0.479,
+    "arrow": 0.476,
+    "rectangle": 0.487,
+    "ellipse": 0.442,
+    "triangle": 0.418,
+    "diamond": 0.438,
+    "pentagon": 0.4,
+    "hexagon": 0.433
+  }
+}
