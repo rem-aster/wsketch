@@ -1,4 +1,6 @@
-# wsketch
+# @rem-aster/wsketch
+
+![Hand-drawn strokes turn into a rectangle, an ellipse, arrows, a triangle, a hexagon and a diamond; a wavy line stays ink](https://raw.githubusercontent.com/rem-aster/wsketch/main/docs/demo.gif)
 
 Turns a hand-drawn whiteboard stroke into a clean shape. A small network (the light
 model, 244 KB, bundled) says which shape one pen stroke is, or that it is not a shape;
@@ -16,26 +18,28 @@ Anything else (`none`) stays ink: `shape` is `null`. Coordinates are the stroke'
 
 ## Install
 
-The package is not published. Build it, then add it to the app by path:
+```bash
+npm install @rem-aster/wsketch onnxruntime-web
+```
+
+The library has no dependencies of its own: you pass an ONNX Runtime in. `onnxruntime-web`
+in the browser, `onnxruntime-node` or `onnxruntime-react-native` elsewhere.
+
+To work against a local checkout of the repository instead, build it and link it:
 
 ```bash
 bun install --cwd packages/wsketch
-bun run --cwd packages/wsketch build          # dist/: the code and the model
-bun add wsketch@link:../wsketch/packages/wsketch   # from the app, adjust the path
+bun run --cwd packages/wsketch build                  # dist/: the code and the model
+bun add @rem-aster/wsketch@link:../wsketch/packages/wsketch   # from the app, adjust the path
 ```
-
-`link:` follows rebuilds. For a copy instead, `bun pm pack` in `packages/wsketch` and
-`bun add ./wsketch-0.1.0.tgz`. The app also needs an ONNX Runtime: `onnxruntime-web` in
-the browser (`onnxruntime-node` or `onnxruntime-react-native` elsewhere). The library has
-no dependencies of its own: you pass the runtime in.
 
 ## Use
 
 ```ts
 import * as ort from "onnxruntime-web/wasm"
 import wasmUrl from "onnxruntime-web/ort-wasm-simd-threaded.wasm?url"
-import { Recognizer, toSvgPath } from "wsketch"
-import modelUrl from "wsketch/model.onnx?url" // Vite; any URL or the file's bytes will do
+import { Recognizer, toSvgPath } from "@rem-aster/wsketch"
+import modelUrl from "@rem-aster/wsketch/model.onnx?url" // Vite; any URL or the file's bytes will do
 
 ort.env.wasm.wasmPaths = { wasm: wasmUrl }
 const recognizer = await Recognizer.load({ ort, model: modelUrl })
@@ -88,11 +92,11 @@ probability, aligned with `result.samples`) or the tip is guessed from the geome
 ```ts
 import * as ort from "onnxruntime-node"
 import { readFileSync } from "node:fs"
-import { Recognizer } from "wsketch"
+import { Recognizer } from "@rem-aster/wsketch"
 
 const recognizer = await Recognizer.load({
   ort,
-  model: readFileSync(new URL(import.meta.resolve("wsketch/model.onnx"))),
+  model: readFileSync(new URL(import.meta.resolve("@rem-aster/wsketch/model.onnx"))),
 })
 ```
 
@@ -114,3 +118,10 @@ bun test          # fitting on synthetic strokes, the Python preprocessing contr
 bun run check     # types
 bun run build     # after exporting a new model to ../../models: regenerates src/meta.ts and dist/
 ```
+
+## License
+
+Apache-2.0. The bundled model was trained on synthetic strokes and on the
+[Quick, Draw! dataset](https://github.com/googlecreativelab/quickdraw-dataset) by Google,
+licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Training code and
+data preparation are in the [repository](https://github.com/rem-aster/wsketch).

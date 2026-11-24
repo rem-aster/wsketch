@@ -21,7 +21,7 @@ export type ModelSource = string | URL | ArrayBuffer | Uint8Array
 
 export type RecognizerOptions = {
   ort: OrtLike
-  /** The model, e.g. the URL of `wsketch/model.onnx`. */
+  /** The model, e.g. the URL of `@rem-aster/wsketch/model.onnx`. */
   model: ModelSource
   /** The model's description; the bundled model's when omitted. */
   meta?: ModelMeta

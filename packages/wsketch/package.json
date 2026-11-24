@@ -1,7 +1,25 @@
 {
-  "name": "wsketch",
+  "name": "@rem-aster/wsketch",
   "version": "0.1.0",
   "description": "Turns a hand-drawn whiteboard stroke into a clean shape: line, arrow, rectangle, ellipse, triangle, diamond, pentagon, hexagon",
+  "keywords": [
+    "whiteboard",
+    "sketch",
+    "ink",
+    "stroke",
+    "shape recognition",
+    "beautification",
+    "onnx"
+  ],
+  "license": "Apache-2.0",
+  "author": "rem-aster",
+  "homepage": "https://github.com/rem-aster/wsketch/tree/main/packages/wsketch#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rem-aster/wsketch.git",
+    "directory": "packages/wsketch"
+  },
+  "bugs": "https://github.com/rem-aster/wsketch/issues",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,9 +34,14 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "src",
+    "README.md",
+    "LICENSE"
   ],
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "bun scripts/build.ts",
     "check": "tsc --noEmit",

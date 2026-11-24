@@ -13,8 +13,8 @@
     type FitOptions,
     type Pt,
     type Shape,
-  } from "wsketch"
-  import modelUrl from "wsketch/model.onnx?url"
+  } from "@rem-aster/wsketch"
+  import modelUrl from "@rem-aster/wsketch/model.onnx?url"
 
   ort.env.wasm.numThreads = 1
   ort.env.wasm.wasmPaths = { wasm: wasmUrl }
