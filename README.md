@@ -1,5 +1,7 @@
 # wsketch
 
+![Hand-drawn strokes turn into a rectangle, an ellipse, arrows, a triangle, a hexagon and a diamond; a wavy line stays ink](docs/demo.gif)
+
 Single-stroke shape recognition for a classroom whiteboard. A small network looks
 at one pen stroke and says which shape it is, or that it is not a shape; ordinary
 geometry then fits that shape to the stroke so it can replace the ink.
